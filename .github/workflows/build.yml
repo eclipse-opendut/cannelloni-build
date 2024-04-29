@@ -5,11 +5,12 @@ on:
     tags:
     - v[0-9]+.[0-9]+.[0-9]+
 
-
 jobs:
   build:
     name: Build cannelloni for all architectures
     runs-on: ["ubuntu-latest"]
+    permissions:
+      contents: write
     steps:
     - name: Checkout Sources
       uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b  # v4.1.4
@@ -18,6 +19,6 @@ jobs:
       run: ./build.sh
 
     - uses: ncipollo/release-action@2c591bcc8ecdcd2db72b97d6147f871fcd833ba5  # v1.14.0
-      name: "Create release {{ env.VERSION }}"
+      name: "Create release"
       with:
         artifacts: "out/*.tar.gz"
