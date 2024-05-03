@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 
 # default version, hash
 VERSION="${VERSION:-1.1.0}"
@@ -14,6 +15,9 @@ if [ -z "$HASH" ]; then
   echo "Could not find environment variable HASH!"
   exit 1
 fi
+
+# show verbose build output
+export BUILDKIT_PROGRESS=plain
 
 for ARCHITECTURE in $ALL_ARCHITECTURES; do
   docker build \
