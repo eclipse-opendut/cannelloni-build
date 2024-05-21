@@ -48,7 +48,7 @@ Run `build.sh` to build for all architectures.
   wget https://github.com/mguentner/cannelloni/archive/refs/tags/v1.1.0.tar.gz -O cannelloni-1.1.0.tar.gz
   sha256sum cannelloni-1.1.0.tar.gz
   ```
-* Update version and hash in [build script](build.sh).
+* Update version and hash in [build script](build.py).
 * Set new git tag
   ```shell
   git tag v1.1.0
@@ -57,4 +57,4 @@ Run `build.sh` to build for all architectures.
 ## Add another architecture
 
 * Check for available version at [docker-cross](https://github.com/dockcross/dockcross).
-* Update variable `ALL_ARCHITECTURES` in [build script](build.sh).
+* Update variable `ALL_ARCHITECTURES` in [build script](build.py).
