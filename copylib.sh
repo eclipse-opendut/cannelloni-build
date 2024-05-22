@@ -8,5 +8,5 @@ if [ -n "$TARGET_XCC_DIR" ]; then
   cp /usr/include/netinet/sctp.h "$TARGET_XCC_DIR"/usr/include/netinet/
   cp /usr/lib/*/libsctp.* "$TARGET_XCC_DIR"/usr/lib/
 else
-  echo "Nothing to do for current architecture: $ARCHITECTURE"
+  echo "Not a cross build. Nothing to do for current architecture: $ARCHITECTURE"
 fi

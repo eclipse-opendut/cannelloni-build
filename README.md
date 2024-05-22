@@ -7,6 +7,7 @@ Uses [dockcross](https://github.com/dockcross/dockcross) to compile for the spec
   * [linux-arm64](https://hub.docker.com/r/dockcross/linux-arm64), **arm64** for e.g. Yocto Linux
   * [linux-x64](https://hub.docker.com/r/dockcross/linux-x64), **x86_64** for regular desktop (does not require cross)
   * [linux-armv7](https://hub.docker.com/r/dockcross/linux-armv7), **armv7** for e.g. Raspberry Pi 3
+  * [linux-armv6-lts](https://hub.docker.com/r/dockcross/linux-armv6-lts), for e.g. Raspberry Pi 3 with good old Raspbian, arm-linux-gnueabihf, armhf, glibc 2.28
 
 
 ## Build for multiple architectures
@@ -58,3 +59,27 @@ Run `build.sh` to build for all architectures.
 
 * Check for available version at [docker-cross](https://github.com/dockcross/dockcross).
 * Update variable `ALL_ARCHITECTURES` in [build script](build.py).
+
+
+## Check your architecture
+
+* System information on e.g. your Raspberry Pi:
+```shell
+uname --all           # print system information (kernel version, processor type)
+uname --machine       # print machine hardware information
+strings /lib/arm-linux-gnueabihf/libc.so.6 | grep GLIBC_
+strings /lib/*/libc.so.6 | grep GLIBC_
+ldd --version         # GCC version
+gcc -v                # GCC version
+gcc -print-multiarch  # print target triple
+
+```
+
+* Check binary and shared object files
+```shell
+# ldd - print shared object dependencies
+ldd ./cannelloni
+ldd ./libcannelloni-common.so.0
+# readelf - display information about ELF files
+readelf -h libcannelloni-common.so.0
+```
