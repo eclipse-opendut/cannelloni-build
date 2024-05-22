@@ -4,10 +4,10 @@ CI pipeline to build [cannelloni](https://github.com/mguentner/cannelloni) for m
 Uses [dockcross](https://github.com/dockcross/dockcross) to compile for the specified architectures.
 
 * Configured architectures are:
-  * [linux-arm64](https://hub.docker.com/r/dockcross/linux-arm64), **arm64** for e.g. Yocto Linux
-  * [linux-x64](https://hub.docker.com/r/dockcross/linux-x64), **x86_64** for regular desktop (does not require cross)
-  * [linux-armv7](https://hub.docker.com/r/dockcross/linux-armv7), **armv7** for e.g. Raspberry Pi 3
+  * [manylinux_2_28-x64](https://hub.docker.com/r/dockcross/manylinux_2_28-x64), **x86_64** for regular desktop (does not require cross, uses glibc 2.28)
   * [linux-armv6-lts](https://hub.docker.com/r/dockcross/linux-armv6-lts), for e.g. Raspberry Pi 3 with good old Raspbian, arm-linux-gnueabihf, armhf, glibc 2.28
+  * [linux-armv7-lts](https://hub.docker.com/r/dockcross/linux-armv7-lts), **armv7**
+  * [linux-arm64-lts](https://hub.docker.com/r/dockcross/linux-arm64-lts), **arm64** for e.g. Yocto Linux
 
 
 ## Build for multiple architectures
@@ -69,7 +69,7 @@ uname --all           # print system information (kernel version, processor type
 uname --machine       # print machine hardware information
 strings /lib/arm-linux-gnueabihf/libc.so.6 | grep GLIBC_
 strings /lib/*/libc.so.6 | grep GLIBC_
-ldd --version         # GCC version
+ldd --version         # GLIBC version
 gcc -v                # GCC version
 gcc -print-multiarch  # print target triple
 
