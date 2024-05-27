@@ -37,8 +37,8 @@ RUN mv cannelloni/gpl-2.0.txt cannelloni/cannelloni-license-gpl-2.0.txt
 # copy libsctp license to target directory
 RUN curl https://raw.githubusercontent.com/sctp/lksctp-tools/master/COPYING.lib --output /tmp/cannelloni/libsctp-license.txt
 # add note about source
-RUN echo "You can find a copy of the cannelloni source code at: https://github.com/mguentner/cannelloni/archive/refs/tags/v$VERSION.tar.gz" > /tmp/cannelloni/SOURCES.md
-RUN echo "You can find a copy of the libsctp source and license here: https://github.com/sctp/lksctp-tools" >> /tmp/cannelloni/SOURCES.md
+RUN echo "You can find a copy of the cannelloni source code here: https://github.com/mguentner/cannelloni/archive/refs/tags/v$VERSION.tar.gz  " > /tmp/cannelloni/SOURCES.md
+RUN echo "You can find a copy of the libsctp source code here: https://github.com/sctp/lksctp-tools" >> /tmp/cannelloni/SOURCES.md
 
 # create tar file as output
 RUN tar cf /tmp/cannelloni.tar.gz \
