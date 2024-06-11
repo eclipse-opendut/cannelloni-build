@@ -12,7 +12,7 @@ Uses [dockcross](https://github.com/dockcross/dockcross) to compile for the spec
 
 ## Build for multiple architectures
 
-Run `build.sh` to build for all architectures.
+Run `python build.py` to build for all architectures.
 
 ## Install cannelloni
 
