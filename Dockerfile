@@ -31,12 +31,12 @@ WORKDIR $LIBSCTP_BUILD_DIR
 COPY build_libsctp.sh /build_libsctp.sh
 # https://github.com/docker/docs/blob/da4ccc81e6b1bbd585c9f5ac9a35b9c8684c5d57/content/build/building/best-practices.md#using-pipes
 # If you want the command to fail due to an error at any stage in the pipe, prepend set -o pipefail && to ensure that an unexpected error prevents the build from inadvertently succeeding. For example:
-RUN set -o pipefail && /build_libsctp.sh | tee -a ${CANNELLONI_BUILD_LOG}
+RUN ["/bin/bash", "-c", "set -o pipefail && /build_libsctp.sh | tee -a ${CANNELLONI_BUILD_LOG}"]
 
 # Build cannelloni
 WORKDIR $CANNELLONI_BUILD_DIR
 COPY build_cannelloni.sh /build_cannelloni.sh
-RUN set -o pipefail  && /build_cannelloni.sh | tee -a ${CANNELLONI_BUILD_LOG}
+RUN ["/bin/bash", "-c", "set -o pipefail && /build_cannelloni.sh | tee -a ${CANNELLONI_BUILD_LOG}"]
 
 # Bundle result files: create tar file as output
 WORKDIR /tmp/
