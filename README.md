@@ -12,33 +12,44 @@ Uses [dockcross](https://github.com/dockcross/dockcross) to compile for the spec
 
 ## Build for multiple architectures
 
+If building with podman, it requires at least version 4.1 (requires the output flag implemented [here](https://github.com/containers/buildah/pull/3823)).
 Run `python build.py` to build for all architectures.
+
+### Description of build workflow
+
+The build workflow is run in docker containers (dockcross).
+1. Build libsctp 
+    * Build in temporary directory `LIBSCTP_BUILD_DIR=/tmp/libsctp_build/`
+    * Copy libraries and headers to cannelloni build directory `CANNELLONI_BUILD_DIR=/tmp/cannelloni_build/`
+    * Copy release artifacts to target directory `TARGET_DIR=/tmp/cannelloni`
+    * Add notes about source code origin to `${TARGET_DIR}/SOURCES.md`
+2. Build cannelloni
+    * Build in temporary directory `CANNELLONI_BUILD_DIR=/tmp/cannelloni_build/`
+    * Copy release artifacts to `TARGET_DIR=/tmp/cannelloni`
+    * Add notes about source code origin to `${TARGET_DIR}/SOURCES.md`
+3. Bundle files from `TARGET_DIR` into final release artifact. 
+4. Separate docker build stage is used to collect the final release artifact
 
 ## Install cannelloni
 
 * Download appropriate architecture.
   ```shell
-  wget https://github.com/eclipse-opendut/cannelloni/releases/download/v1.1.0/cannelloni_linux-x64_1.1.0.tar.gz
-  tar xf cannelloni_linux-x64_1.1.0.tar.gz
+  wget https://github.com/eclipse-opendut/cannelloni/releases/download/v1.1.0/cannelloni_linux-x64_1.1.0.tar.gz -O /tmp/cannelloni.tar.gz
+  cd /tmp
+  tar xf cannelloni.tar.gz
   ```
-* Install dependencies on Ubuntu/Debian
-  ```shell
-  # libsctp1: user-space access to Linux kernel SCTP - shared library
-  apt-get install -y libsctp1
-  # can-utils: SocketCAN userspace utilities and tools
-  apt-get install -y can-utils
-  ```
+* The archive comes with a matching `libsctp` included.
 * Extract archive on your target system and copy to system location: 
   ```shell
   cp cannelloni/libcannelloni-common.so.0 /lib/
   cp cannelloni/cannelloni /usr/local/bin/
   cannelloni  # run cannelloni
   ```
-* Or to custom library location:
+* Or copy to custom location:
   ```shell
-  cp cannelloni/libcannelloni-common.so.0 /usr/local/lib/
-  cp cannelloni/cannelloni /usr/local/bin/
-  export LD_LIBRARY_PATH="/usr/local/lib/:$LD_LIBRARY_PATH"
+  sudo cp /tmp/cannelloni/ /opt/cannelloni
+  export LD_LIBRARY_PATH="/opt/cannelloni/:$LD_LIBRARY_PATH"
+  export PATH="/opt/cannelloni:$PATH"
   cannelloni  # run cannelloni
   ```
 
