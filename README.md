@@ -34,7 +34,7 @@ The build workflow is run in docker containers (dockcross).
 
 * Download appropriate architecture.
   ```shell
-  wget https://github.com/eclipse-opendut/cannelloni/releases/download/v1.1.0/cannelloni_linux-x64_1.1.0.tar.gz -O /tmp/cannelloni.tar.gz
+  wget https://github.com/eclipse-opendut/cannelloni-build/releases/download/v1.1.0/cannelloni_linux-x64_1.1.0.tar.gz -O /tmp/cannelloni.tar.gz
   cd /tmp
   tar xf cannelloni.tar.gz
   ```
