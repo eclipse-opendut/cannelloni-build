@@ -41,7 +41,7 @@ RUN ["/bin/bash", "-c", "set -o pipefail && /build_cannelloni.sh | tee -a ${CANN
 # Bundle result files: create tar file as output
 WORKDIR /tmp/
 RUN find $TARGET_DIR
-RUN tar cf /tmp/cannelloni.tar.gz cannelloni/*
+RUN tar cfz /tmp/cannelloni.tar.gz cannelloni/*
 
 # Separate build stage, all files in this stage are added to the final output
 FROM scratch AS export-stage
