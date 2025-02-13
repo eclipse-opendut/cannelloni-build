@@ -32,9 +32,9 @@ The build workflow is run in docker containers (dockcross).
 
 ## Install cannelloni
 
-* Download appropriate architecture.
+* Download appropriate architecture, see [releases](https://github.com/eclipse-opendut/cannelloni-build/releases).
   ```shell
-  wget https://github.com/eclipse-opendut/cannelloni-build/releases/download/v1.1.0/cannelloni_linux-x64_1.1.0.tar.gz -O /tmp/cannelloni.tar.gz
+  wget https://github.com/eclipse-opendut/cannelloni-build/releases/download/v1.1.0/cannelloni_manylinux_2_28-x64_1.1.0.tar.gz -O /tmp/cannelloni.tar.gz
   cd /tmp
   tar xf cannelloni.tar.gz
   ```
@@ -42,6 +42,7 @@ The build workflow is run in docker containers (dockcross).
 * Extract archive on your target system and copy to system location: 
   ```shell
   cp cannelloni/libcannelloni-common.so.0 /lib/
+  cp cannelloni/libsctp.* /lib/
   cp cannelloni/cannelloni /usr/local/bin/
   cannelloni  # run cannelloni
   ```
